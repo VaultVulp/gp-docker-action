@@ -1,17 +1,20 @@
-name: 'Publish Docker Image to GitHub Registry'
+name: 'Build and publish Docker Image to GitHub Registry'
 description: 'GitHub Action to publish Docker Images to GitHub Registry'
 inputs:
   github-token:
     description: 'GitHub token to push Docker image to GitHub Packages'
+    required: true
   image-name:
     description: 'Docker Image name'
     required: true
   image-tag:
     description: 'Docker Image tag'
-    default: latest
+    default: "latest"
+    required: false
   extract-git-tag:
     description: 'Extract git-tag from repository'
-    default: false
+    default: "false"
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
