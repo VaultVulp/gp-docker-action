@@ -15,6 +15,10 @@ inputs:
     description: 'Extract git-tag from repository'
     default: "false"
     required: false
+  build-context:
+    description: 'Path to build context'
+    default: "."
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -23,6 +27,7 @@ runs:
     - ${{ inputs.image-name }}
     - ${{ inputs.image-tag }}
     - ${{ inputs.extract-git-tag }}
+    - ${{ inputs.build-context}}
 branding:
   icon: 'box'
   color: 'blue'
