@@ -1,4 +1,4 @@
-name: 'Build and publish Docker Image to GitHub Registry'
+name: 'Build and publish Docker Image to GitHub Registry with custom Dockerfile'
 description: 'GitHub Action to publish Docker Images to GitHub Registry'
 inputs:
   github-token:
@@ -15,6 +15,10 @@ inputs:
     description: 'Extract git-tag from repository'
     default: "false"
     required: false
+  dockerfile:
+    description: 'Dockerfile name'
+    default: "Dockerfile"
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -23,6 +27,7 @@ runs:
     - ${{ inputs.image-name }}
     - ${{ inputs.image-tag }}
     - ${{ inputs.extract-git-tag }}
+    - ${{ inputs.dockerfile }}
 branding:
   icon: 'box'
   color: 'blue'

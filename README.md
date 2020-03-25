@@ -20,7 +20,7 @@
         image-tag: head # Provide Docker image tag
 ```
 
-### Build and publish Docker Image with a `latest` tag for the `master` branch
+### Build and publish Docker Image with a `latest` tag for the `master` branch with different dockerfile
 
 ```yaml
   build-and-publish-latest:
@@ -35,6 +35,7 @@
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide only Docker image name, tag will be automatically set to latest
+        dockerfile: Dockerfile_server
 ```
 
 ### Build and publish Docker Image with a tag equal to a git tag
