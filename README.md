@@ -13,7 +13,7 @@
     - uses: actions/checkout@v2 # Checking out the repo
 
     - name: Build and Publish head Docker image
-      uses: VaultVulp/gp-docker-action@1.0.1
+      uses: VaultVulp/gp-docker-action@1.1.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
@@ -31,7 +31,7 @@
     - uses: actions/checkout@v2 # Checking out the repo
 
     - name: Build and Publish latest Docker image
-      uses: VaultVulp/gp-docker-action@1.0.1
+      uses: VaultVulp/gp-docker-action@1.1.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide only Docker image name, tag will be automatically set to latest
@@ -49,9 +49,27 @@
     - uses: actions/checkout@v2
 
     - name: Build and Publish Tag Docker image
-      uses: VaultVulp/gp-docker-action@1.0.1
+      uses: VaultVulp/gp-docker-action@1.1.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide only Docker image name
         extract-git-tag: true # Provide flag to extract Docker image tag from git reference
+```
+
+### Build and publish Docker Image with a differnet build context
+
+```yaml
+  build-and-publish-dev:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/develop' # Running this job only for develop branch
+
+    steps:
+    - uses: actions/checkout@v2 # Checking out the repo
+
+    - name: Build and Publish head Docker image
+      uses: VaultVulp/gp-docker-action@1.1.0
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
+        image-name: my-cool-service # Provide Docker image name
+        build-context: ./dev # Provide path to the folder with the Dockerfile
 ```
