@@ -1,5 +1,5 @@
 name: 'Build and publish Docker Image to GitHub Registry'
-description: 'GitHub Action to publish Docker Images to GitHub Registry. It's possible to specify custom Dockerfile and\or build context, if it's required.'
+description: 'GitHub Action to publish Docker Images to GitHub Registry. It is possible to specify custom Dockerfile and\or build context, if it is required.'
 inputs:
   github-token:
     description: 'GitHub token to push Docker image to GitHub Packages'
