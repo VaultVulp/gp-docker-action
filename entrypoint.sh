@@ -14,5 +14,5 @@ fi
 DOCKER_IMAGE_FULL_PATH=$(echo docker.pkg.github.com/${GITHUB_REPOSITORY}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} | tr '[:upper:]' '[:lower:]')
 
 docker login -u publisher -p ${DOCKER_TOKEN} docker.pkg.github.com
-docker build -t $DOCKER_IMAGE_FULL_PATH $BUILD_CONTEXT -f $DOCKERFILE
+docker build -t $DOCKER_IMAGE_FULL_PATH -f $DOCKERFILE $BUILD_CONTEXT
 docker push $DOCKER_IMAGE_FULL_PATH
