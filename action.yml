@@ -1,5 +1,5 @@
 name: 'Build and publish Docker Image to GitHub Registry'
-description: 'GitHub Action to publish Docker Images to GitHub Registry'
+description: 'GitHub Action to publish Docker Images to GitHub Registry. It's possible to specify custom Dockerfile and\or build context, if it's required.'
 inputs:
   github-token:
     description: 'GitHub token to push Docker image to GitHub Packages'
@@ -15,6 +15,10 @@ inputs:
     description: 'Extract git-tag from repository'
     default: "false"
     required: false
+  dockerfile:
+    description: 'Dockerfile name'
+    default: "Dockerfile"
+    required: false
   build-context:
     description: 'Path to build context'
     default: "."
@@ -27,6 +31,7 @@ runs:
     - ${{ inputs.image-name }}
     - ${{ inputs.image-tag }}
     - ${{ inputs.extract-git-tag }}
+    - ${{ inputs.dockerfile }}
     - ${{ inputs.build-context}}
 branding:
   icon: 'box'
