@@ -18,6 +18,9 @@ inputs:
   dockerfile:
     description: 'Dockerfile name'
     default: "Dockerfile"
+  build-context:
+    description: 'Path to build context'
+    default: "."
     required: false
 runs:
   using: 'docker'
@@ -28,6 +31,7 @@ runs:
     - ${{ inputs.image-tag }}
     - ${{ inputs.extract-git-tag }}
     - ${{ inputs.dockerfile }}
+    - ${{ inputs.build-context}}
 branding:
   icon: 'box'
   color: 'blue'

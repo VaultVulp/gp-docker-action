@@ -2,7 +2,7 @@
 
 ## Usage examples:
 
-### Build and publish Docker Image with a `head` tag for the `develop` branch 
+### Build and publish Docker Image with a `head` tag for the `develop` branch
 
 ```yaml
   build-and-publish-head:
