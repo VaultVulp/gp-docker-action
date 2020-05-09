@@ -1,4 +1,4 @@
-# GitHub Action to publish Docker Images to GitHub Registry
+# GitHub Action to build and publish Docker Images to GitHub Package Registry
 
 ## Usage examples:
 
