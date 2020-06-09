@@ -89,5 +89,5 @@
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
-        pull-image: true
+        pull-image: true # Raise the flag to try to pull image
 ```
