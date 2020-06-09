@@ -73,3 +73,21 @@
         image-name: my-cool-service # Provide Docker image name
         build-context: ./dev # Provide path to the folder with the Dockerfile
 ```
+
+### Pulling the image before building it
+
+```yaml
+  pull-and-build-dev:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/develop' # Running this job only for develop branch
+
+    steps:
+    - uses: actions/checkout@v2 # Checking out the repo
+
+    - name: Build and Publish head Docker image
+      uses: VaultVulp/gp-docker-action@1.1.1
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
+        image-name: my-cool-service # Provide Docker image name
+        pull-image: true
+```
