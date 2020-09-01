@@ -91,3 +91,22 @@
         image-name: my-cool-service # Provide Docker image name
         pull-image: true # Raise the flag to try to pull image
 ```
+
+------
+
+You will encounter the following log message in your GitHub Actions Pipelines:
+
+```
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+WARNING! Your password will be stored unencrypted in /github/home/.docker/config.json.
+Login Succeeded
+```
+
+I would like to encourage you, that I do not store your secrets, passwords, token, or any other information.
+
+This warning informs you about the fact, that this Action passes your GitHub token via the command line argument:
+```bash
+docker login -u publisher -p ${DOCKER_TOKEN} docker.pkg.github.com
+```
+
+In a non-safe environment, this could raise a security issue, but this is not the case. We are passing a temporary authorization token, which will become useless once the pipeline is complete. It will also require additional code to extract this token from the environment or `docker` internals, that this Action does not have.
