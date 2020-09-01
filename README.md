@@ -13,7 +13,7 @@
     - uses: actions/checkout@v2 # Checking out the repo
 
     - name: Build and Publish head Docker image
-      uses: VaultVulp/gp-docker-action@1.1.6
+      uses: VaultVulp/gp-docker-action@1.1.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
@@ -31,7 +31,7 @@
     - uses: actions/checkout@v2 # Checking out the repo
 
     - name: Build and Publish latest Docker image
-      uses: VaultVulp/gp-docker-action@1.1.6
+      uses: VaultVulp/gp-docker-action@1.1.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide only Docker image name, tag will be automatically set to latest
@@ -49,7 +49,7 @@
     - uses: actions/checkout@v2
 
     - name: Build and Publish Tag Docker image
-      uses: VaultVulp/gp-docker-action@1.1.6
+      uses: VaultVulp/gp-docker-action@1.1.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide only Docker image name
@@ -67,7 +67,7 @@
     - uses: actions/checkout@v2 # Checking out the repo
 
     - name: Build and Publish head Docker image
-      uses: VaultVulp/gp-docker-action@1.1.6
+      uses: VaultVulp/gp-docker-action@1.1.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
@@ -85,7 +85,7 @@
     - uses: actions/checkout@v2 # Checking out the repo
 
     - name: Build and Publish head Docker image
-      uses: VaultVulp/gp-docker-action@1.1.6
+      uses: VaultVulp/gp-docker-action@1.1.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
