@@ -27,6 +27,10 @@ inputs:
     description: 'Pull the image before buiding it'
     default: "false"
     required: false
+  custom-args:
+    description: 'Any additional docker build arguments as a string'
+    default: ""
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -38,6 +42,7 @@ runs:
     - ${{ inputs.dockerfile }}
     - ${{ inputs.build-context}}
     - ${{ inputs.pull-image}}
+    - ${{ inputs.custom-args}}
 branding:
   icon: 'box'
   color: 'blue'
