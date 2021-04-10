@@ -13,7 +13,7 @@
     - uses: actions/checkout@v2 # Checking out the repo
 
     - name: Build and Publish head Docker image
-      uses: VaultVulp/gp-docker-action@1.1.7
+      uses: VaultVulp/gp-docker-action@1.1.8
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
@@ -31,7 +31,7 @@
     - uses: actions/checkout@v2 # Checking out the repo
 
     - name: Build and Publish latest Docker image
-      uses: VaultVulp/gp-docker-action@1.1.7
+      uses: VaultVulp/gp-docker-action@1.1.8
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide only Docker image name, tag will be automatically set to latest
@@ -49,7 +49,7 @@
     - uses: actions/checkout@v2
 
     - name: Build and Publish Tag Docker image
-      uses: VaultVulp/gp-docker-action@1.1.7
+      uses: VaultVulp/gp-docker-action@1.1.8
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide only Docker image name
@@ -67,7 +67,7 @@
     - uses: actions/checkout@v2 # Checking out the repo
 
     - name: Build and Publish head Docker image
-      uses: VaultVulp/gp-docker-action@1.1.7
+      uses: VaultVulp/gp-docker-action@1.1.8
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
@@ -85,11 +85,28 @@
     - uses: actions/checkout@v2 # Checking out the repo
 
     - name: Build and Publish head Docker image
-      uses: VaultVulp/gp-docker-action@1.1.7
+      uses: VaultVulp/gp-docker-action@1.1.8
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
         pull-image: true # Raise the flag to try to pull image
+```
+
+
+### Passing additional arguments to the docker build command
+
+```yaml
+  build-with-custom-args:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/develop' # Running this job only for develop branch
+
+    steps:
+    - uses: actions/checkout@v2 # Checking out the repo
+
+    - name: Build with --build-arg(s)
+      uses: VaultVulp/gp-docker-action@1.1.8
+      with:
+        custom-args: --build-arg some=value --build-arg some_other=value
 ```
 
 ------
