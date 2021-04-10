@@ -106,6 +106,8 @@
     - name: Build with --build-arg(s)
       uses: VaultVulp/gp-docker-action@1.1.8
       with:
+        github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
+        image-name: my-cool-service # Provide Docker image name
         custom-args: --build-arg some=value --build-arg some_other=value
 ```
 
