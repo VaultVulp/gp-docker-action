@@ -13,7 +13,7 @@
     - uses: actions/checkout@v2 # Checking out the repo
 
     - name: Build and Publish head Docker image
-      uses: VaultVulp/gp-docker-action@1.1.8
+      uses: VaultVulp/gp-docker-action@1.2.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
@@ -31,7 +31,7 @@
     - uses: actions/checkout@v2 # Checking out the repo
 
     - name: Build and Publish latest Docker image
-      uses: VaultVulp/gp-docker-action@1.1.8
+      uses: VaultVulp/gp-docker-action@1.2.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide only Docker image name, tag will be automatically set to latest
@@ -49,7 +49,7 @@
     - uses: actions/checkout@v2
 
     - name: Build and Publish Tag Docker image
-      uses: VaultVulp/gp-docker-action@1.1.8
+      uses: VaultVulp/gp-docker-action@1.2.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide only Docker image name
@@ -67,7 +67,7 @@
     - uses: actions/checkout@v2 # Checking out the repo
 
     - name: Build and Publish head Docker image
-      uses: VaultVulp/gp-docker-action@1.1.8
+      uses: VaultVulp/gp-docker-action@1.2.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
@@ -85,7 +85,7 @@
     - uses: actions/checkout@v2 # Checking out the repo
 
     - name: Build and Publish head Docker image
-      uses: VaultVulp/gp-docker-action@1.1.8
+      uses: VaultVulp/gp-docker-action@1.2.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
@@ -104,7 +104,7 @@
     - uses: actions/checkout@v2 # Checking out the repo
 
     - name: Build with --build-arg(s)
-      uses: VaultVulp/gp-docker-action@1.1.8
+      uses: VaultVulp/gp-docker-action@1.2.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
@@ -125,7 +125,7 @@ I would like to encourage you, that I do not store your secrets, passwords, toke
 
 This warning informs you about the fact, that this Action passes your GitHub token via the command line argument:
 ```bash
-docker login -u publisher -p ${DOCKER_TOKEN} docker.pkg.github.com
+docker login -u publisher -p ${DOCKER_TOKEN} ghcr.io
 ```
 
 In a non-safe environment, this could raise a security issue, but this is not the case. We are passing a temporary authorization token, which will become useless once the pipeline is complete. It will also require additional code to extract this token from the environment or `docker` internals, that this Action does not have.
