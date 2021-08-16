@@ -125,7 +125,7 @@ I would like to encourage you, that I do not store your secrets, passwords, toke
 
 This warning informs you about the fact, that this Action passes your GitHub token via the command line argument:
 ```bash
-docker login -u publisher -p ${DOCKER_TOKEN} docker.pkg.github.com
+docker login -u publisher -p ${DOCKER_TOKEN} ghcr.io
 ```
 
 In a non-safe environment, this could raise a security issue, but this is not the case. We are passing a temporary authorization token, which will become useless once the pipeline is complete. It will also require additional code to extract this token from the environment or `docker` internals, that this Action does not have.

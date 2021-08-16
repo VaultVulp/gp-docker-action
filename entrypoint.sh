@@ -13,10 +13,10 @@ if [ $EXTRACT_TAG_FROM_GIT_REF == "true" ]; then
   DOCKER_IMAGE_TAG=$(echo ${GITHUB_REF} | sed -e "s/refs\/tags\///g")
 fi
 
-DOCKER_IMAGE_NAME=$(echo docker.pkg.github.com/${GITHUB_REPOSITORY}/${DOCKER_IMAGE_NAME} | tr '[:upper:]' '[:lower:]')
+DOCKER_IMAGE_NAME=$(echo ghcr.io/${GITHUB_REPOSITORY}/${DOCKER_IMAGE_NAME} | tr '[:upper:]' '[:lower:]')
 DOCKER_IMAGE_NAME_WITH_TAG=$(echo ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} | tr '[:upper:]' '[:lower:]')
 
-docker login -u publisher -p ${DOCKER_TOKEN} docker.pkg.github.com
+docker login -u publisher -p ${DOCKER_TOKEN} ghcr.io
 
 if [ $PULL_IMAGE == "true" ]; then
   docker pull $DOCKER_IMAGE_NAME_WITH_TAG || docker pull $DOCKER_IMAGE_NAME || 1
