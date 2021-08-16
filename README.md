@@ -116,11 +116,8 @@
 You will encounter the following log message in your GitHub Actions Pipelines:
 
 ```
-WARNING! Using -*** the CLI is insecure. Use --password-stdin.
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
 WARNING! Your password will be stored unencrypted in /github/home/.docker/config.json.
-Configure a credential helper to remove this warning. See
-https://docs.docker.com/engine/reference/commandline/login/#credentials-store
-
 Login Succeeded
 ```
 
