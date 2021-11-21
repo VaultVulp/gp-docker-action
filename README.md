@@ -56,7 +56,7 @@
         extract-git-tag: true # Provide flag to extract Docker image tag from git reference
 ```
 
-### Build and publish Docker Image with a differnet build context
+### Build and publish Docker Image with a different build context
 
 ```yaml
   build-and-publish-dev:
@@ -121,11 +121,11 @@ WARNING! Your password will be stored unencrypted in /github/home/.docker/config
 Login Succeeded
 ```
 
-I would like to encourage you, that I do not store your secrets, passwords, token, or any other information.
+I would like to ensure you, that I do not store your secrets, passwords, token, or any other information.
 
 This warning informs you about the fact, that this Action passes your GitHub token via the command line argument:
 ```bash
 docker login -u publisher -p ${DOCKER_TOKEN} ghcr.io
 ```
 
-In a non-safe environment, this could raise a security issue, but this is not the case. We are passing a temporary authorization token, which will become useless once the pipeline is complete. It will also require additional code to extract this token from the environment or `docker` internals, that this Action does not have.
+In a non-safe environment, this could raise a security issue, but this is not the case. We are passing a temporary authorization token, which will expire once the pipeline is completed. It would also require additional code to extract this token from the environment or `docker` internals, that this Action does not have.
