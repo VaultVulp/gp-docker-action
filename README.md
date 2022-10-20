@@ -108,7 +108,8 @@
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
-        custom-args: --build-arg some=value --build-arg some_other=value # Pass some additional arguments to the docker build command
+        custom-args: --build-arg=some="value" --build-arg=some_other="value" # Pass some additional arguments to the docker build command
+        # Note, that arguments should be passed with the = sign istead of a space between argument name and values!
 ```
 
 ------
