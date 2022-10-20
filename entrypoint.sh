@@ -22,7 +22,7 @@ if [ $PULL_IMAGE == "true" ]; then
   docker pull $DOCKER_IMAGE_NAME_WITH_TAG || docker pull $DOCKER_IMAGE_NAME || 1
 fi
 
-set -- buildx build -t $DOCKER_IMAGE_NAME_WITH_TAG -f $DOCKERFILE $CUSTOM_DOCKER_BUILD_ARGS $BUILD_CONTEXT
-docker "$@"
+set -- -t $DOCKER_IMAGE_NAME_WITH_TAG -f $DOCKERFILE $CUSTOM_DOCKER_BUILD_ARGS $BUILD_CONTEXT
+docker buildx build "$@"
 
 docker push $DOCKER_IMAGE_NAME_WITH_TAG
