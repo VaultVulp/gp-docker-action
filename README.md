@@ -95,6 +95,19 @@
 
 ### Passing additional arguments to the docker build command
 
+**NB**, additional arguments should be passed with the `=` sign istead of a ` `(space) between argument name and values.
+
+Correct example: 
+```yaml
+custom-args: --build-arg=some="value" 
+                      # ^ this "=" is mandatory
+```
+Incorrect example:
+```yaml
+custom-args: --build-arg some="value" 
+                      # ^ this space might break the action
+```
+
 ```yaml
   build-with-custom-args:
     runs-on: ubuntu-latest
@@ -108,7 +121,7 @@
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
-        custom-args: --build-arg some=value --build-arg some_other=value # Pass some additional arguments to the docker build command
+        custom-args: --build-arg=some="value" --build-arg=some_other="value" # Pass some additional arguments to the docker build command
 ```
 
 ------
