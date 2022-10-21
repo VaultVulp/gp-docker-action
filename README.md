@@ -4,13 +4,21 @@
 
 ### Build and publish Docker Image with a `head` tag for the `develop` branch
 
+Full workflow example:
 ```yaml
+name: Build and publish
+
+on: 
+  push:
+    branches:
+    - "develop" # Running this workflow only for develop branch
+
+jobs:
   build-and-publish-head:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/develop' # Running this job only for develop branch
 
     steps:
-    - uses: actions/checkout@v2 # Checking out the repo
+    - uses: actions/checkout@v2.5.0 # Checking out the repo
 
     - name: Build and Publish head Docker image
       uses: VaultVulp/gp-docker-action@1.2.0
@@ -22,32 +30,48 @@
 
 ### Build and publish Docker Image with a `latest` tag for the `master` branch with different dockerfile
 
+Full workflow example:
 ```yaml
+name: Build and publish
+
+on: 
+  push:
+    branches:
+    - "master" # Running this workflow only for master branch
+
+jobs:
   build-and-publish-latest:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master' # Running this job only for master branch
 
     steps:
-    - uses: actions/checkout@v2 # Checking out the repo
+    - uses: actions/checkout@v2.5.0 # Checking out the repo
 
     - name: Build and Publish latest Docker image
       uses: VaultVulp/gp-docker-action@1.2.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide only Docker image name, tag will be automatically set to latest
-        dockerfile: Dockerfile_server
+        dockerfile: Alternative.Dockerfile # Provide custom Dockerfile name
 ```
 
 ### Build and publish Docker Image with a tag equal to a git tag
 
+Full workflow example:
 ```yaml
+name: Build and publish
+
+on: 
+  push:
+    tags:
+    - "*" # Running this workflow for any tag
+
+jobs:
   build-and-publish-tag:
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/') # Running this job only for tags
 
     steps:
-    - uses: actions/checkout@v2
-
+    - uses: actions/checkout@v2.5.0 # Checking out the repo
+    
     - name: Build and Publish Tag Docker image
       uses: VaultVulp/gp-docker-action@1.2.0
       with:
@@ -58,38 +82,48 @@
 
 ### Build and publish Docker Image with a different build context
 
+Full workflow example:
 ```yaml
-  build-and-publish-dev:
+name: Build and publish
+
+on: push
+
+jobs:
+  build-and-publish-context:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/develop' # Running this job only for develop branch
 
     steps:
-    - uses: actions/checkout@v2 # Checking out the repo
-
-    - name: Build and Publish head Docker image
+    - uses: actions/checkout@v2.5.0 # Checking out the repo
+    
+    - name: Build and Publish Docker image from a different context
       uses: VaultVulp/gp-docker-action@1.2.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
-        build-context: ./dev # Provide path to the folder with the Dockerfile
+        build-context: ./dev # Provide path to the folder with a Dockerfile
 ```
 
 ### Pulling the image before building it
 
+Full workflow example:
 ```yaml
-  pull-and-build-dev:
+name: Build and publish
+
+on: push
+
+jobs:
+  pull-and-build-and-publish:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/develop' # Running this job only for develop branch
 
     steps:
-    - uses: actions/checkout@v2 # Checking out the repo
+    - uses: actions/checkout@v2.5.0 # Checking out the repo
 
     - name: Build and Publish head Docker image
       uses: VaultVulp/gp-docker-action@1.2.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
-        pull-image: true # Raise the flag to try to pull image
+        pull-image: true # Provide the flag to pull image
 ```
 
 
@@ -108,14 +142,19 @@ custom-args: --build-arg some="value"
                       # ^ this space might break the action
 ```
 
+Full workflow example:
 ```yaml
+name: Build and publish
+
+on: push
+
+jobs:
   build-with-custom-args:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/develop' # Running this job only for develop branch
 
     steps:
-    - uses: actions/checkout@v2 # Checking out the repo
-
+    - uses: actions/checkout@v2.5.0 # Checking out the repo
+ 
     - name: Build with --build-arg(s)
       uses: VaultVulp/gp-docker-action@1.2.0
       with:
