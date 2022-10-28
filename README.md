@@ -181,3 +181,6 @@ docker login -u publisher -p ${DOCKER_TOKEN} ghcr.io
 ```
 
 In a non-safe environment, this could raise a security issue, but this is not the case. We are passing a temporary authorization token, which will expire once the pipeline is completed. It would also require additional code to extract this token from the environment or `docker` internals, that this Action does not have.
+
+[This](https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions#upgrading-a-workflow-that-accesses-a-registry-using-a-personal-access-token
+) is the detailed explanation about the `${{ secrets.GITHUB_TOKEN }}` and it's relations with the GCR.
