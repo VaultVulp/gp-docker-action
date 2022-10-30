@@ -8,6 +8,7 @@ DOCKERFILE=$5
 BUILD_CONTEXT=$6
 PULL_IMAGE=$7
 CUSTOM_DOCKER_BUILD_ARGS=$8
+DOCKER_IMAGE_TAGS=$9
 
 if [ $EXTRACT_TAG_FROM_GIT_REF == "true" ]; then
   DOCKER_IMAGE_TAG=$(echo ${GITHUB_REF} | sed -e "s/refs\/tags\///g")
@@ -23,6 +24,13 @@ if [ $PULL_IMAGE == "true" ]; then
 fi
 
 set -- -t $DOCKER_IMAGE_NAME_WITH_TAG -f $DOCKERFILE $CUSTOM_DOCKER_BUILD_ARGS $BUILD_CONTEXT
+
+for tag in $DOCKER_IMAGE_TAGS
+do
+    DOCKER_IMAGE_NAME_WITH_TAG=$(echo ${DOCKER_IMAGE_NAME}:${tag} | tr '[:upper:]' '[:lower:]')
+    set -- -t $DOCKER_IMAGE_NAME_WITH_TAG "$@"
+done
+
 docker buildx build "$@"
 
-docker push $DOCKER_IMAGE_NAME_WITH_TAG
+docker push --all-tags $DOCKER_IMAGE_NAME

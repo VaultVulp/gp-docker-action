@@ -2,9 +2,9 @@
 
 ## Usage examples:
 
-### Build and publish Docker Image with a `head` tag for the `develop` branch
+### Build and publish Docker Image with the `head` tag for the `develop` branch
 
-Full workflow example:
+#### Full workflow example:
 ```yaml
 name: Build and publish
 
@@ -21,7 +21,7 @@ jobs:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
 
     - name: Build and Publish head Docker image
-      uses: VaultVulp/gp-docker-action@1.2.0
+      uses: VaultVulp/gp-docker-action@1.4.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
@@ -30,7 +30,7 @@ jobs:
 
 ### Build and publish Docker Image with a `latest` tag for the `master` branch with different dockerfile
 
-Full workflow example:
+#### Full workflow example:
 ```yaml
 name: Build and publish
 
@@ -47,7 +47,7 @@ jobs:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
 
     - name: Build and Publish latest Docker image
-      uses: VaultVulp/gp-docker-action@1.2.0
+      uses: VaultVulp/gp-docker-action@1.4.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide only Docker image name, tag will be automatically set to latest
@@ -56,7 +56,7 @@ jobs:
 
 ### Build and publish Docker Image with a tag equal to a git tag
 
-Full workflow example:
+#### Full workflow example:
 ```yaml
 name: Build and publish
 
@@ -73,7 +73,7 @@ jobs:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
     
     - name: Build and Publish Tag Docker image
-      uses: VaultVulp/gp-docker-action@1.2.0
+      uses: VaultVulp/gp-docker-action@1.4.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide only Docker image name
@@ -82,7 +82,7 @@ jobs:
 
 ### Build and publish Docker Image with a different build context
 
-Full workflow example:
+#### Full workflow example:
 ```yaml
 name: Build and publish
 
@@ -96,16 +96,16 @@ jobs:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
     
     - name: Build and Publish Docker image from a different context
-      uses: VaultVulp/gp-docker-action@1.2.0
+      uses: VaultVulp/gp-docker-action@1.4.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
         build-context: ./dev # Provide path to the folder with a Dockerfile
 ```
 
-### Pulling the image before building it
+### Pulling an image before building it
 
-Full workflow example:
+#### Full workflow example:
 ```yaml
 name: Build and publish
 
@@ -119,13 +119,64 @@ jobs:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
 
     - name: Build and Publish head Docker image
-      uses: VaultVulp/gp-docker-action@1.2.0
+      uses: VaultVulp/gp-docker-action@1.4.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
         pull-image: true # Provide the flag to pull image
 ```
 
+### Passing additional image tags
+
+**NB**: `additional-image-tags` will **not** replace `image-tag` argument - additional tags will be appended to the list. If no `image-tag` was specified, then image will be tagged with the `latest` tag.
+
+#### Examples:
+
+##### `image-tag` was specified: 
+```yaml
+image-name: my-cool-service
+image-tags: first
+additional-image-tags: second third
+```
+Action will produce one image with three tags:
+- `my-cool-service:first`
+- `my-cool-service:second`
+- `my-cool-service:third`
+
+##### No `image-tag` was specified: 
+
+In this case action will use the default `latest` tag.
+
+```yaml
+image-name: my-cool-service
+additional-image-tags: second third
+```
+Action will produce one image with three tags:
+- `my-cool-service:latest`
+- `my-cool-service:second`
+- `my-cool-service:third`
+
+#### Full workflow example:
+```yaml
+name: Build and publish 
+
+on: push
+
+jobs:
+  build-with-custom-args:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2.5.0 # Checking out the repo
+ 
+    - name: Build with --build-arg(s)
+      uses: VaultVulp/gp-docker-action@1.4.0
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
+        image-name: my-cool-service # Provide Docker image name
+        image-tags: first # if ommitted will be replaced with "latest"
+        additional-image-tags: second third # two additional tags for an image
+```
 
 ### Passing additional arguments to the docker build command
 
@@ -142,7 +193,7 @@ custom-args: --build-arg some="value"
                       # ^ this space might break the action
 ```
 
-Full workflow example:
+#### Full workflow example:
 ```yaml
 name: Build and publish
 
@@ -156,14 +207,14 @@ jobs:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
  
     - name: Build with --build-arg(s)
-      uses: VaultVulp/gp-docker-action@1.2.0
+      uses: VaultVulp/gp-docker-action@1.4.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
         custom-args: --build-arg=some="value" --build-arg=some_other="value" # Pass some additional arguments to the docker build command
 ```
 
-------
+## Security considerations
 
 You will encounter the following log message in your GitHub Actions Pipelines:
 
