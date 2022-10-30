@@ -163,13 +163,13 @@ name: Build and publish
 on: push
 
 jobs:
-  build-with-custom-args:
+  build-with-multiple-tags:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
  
-    - name: Build with --build-arg(s)
+    - name: Build with multiple tags
       uses: VaultVulp/gp-docker-action@1.5.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
