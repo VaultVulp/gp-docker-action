@@ -128,11 +128,11 @@ jobs:
 
 ### Passing additional image tags
 
-**NB**: `additional-image-tags` will **not** replace `image-tag` argument - additional arguments will be appended. 
+**NB**: `additional-image-tags` will **not** replace `image-tag` argument - additional tags will be appended to the list. If no `image-tag` was specified, then image will be tagged with the `latest` tag.
 
 #### Examples:
 
-##### `image-tag` specified: 
+##### `image-tag` was specified: 
 ```yaml
 image-name: my-cool-service
 image-tags: first
@@ -143,9 +143,9 @@ Action will produce one image with three tags:
 - `my-cool-service:second`
 - `my-cool-service:third`
 
-##### No `image-tag` specified: 
+##### No `image-tag` was specified: 
 
-In this case image will be tagged with the default `latest` tag.
+In this case action will use the default `latest` tag.
 
 ```yaml
 image-name: my-cool-service
