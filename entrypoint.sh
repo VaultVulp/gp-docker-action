@@ -25,7 +25,7 @@ fi
 
 set -- -t $DOCKER_IMAGE_NAME_WITH_TAG -f $DOCKERFILE $CUSTOM_DOCKER_BUILD_ARGS $BUILD_CONTEXT
 
-for tag in "$DOCKER_IMAGE_TAGS"
+for tag in $DOCKER_IMAGE_TAGS
 do
     DOCKER_IMAGE_NAME_WITH_TAG=$(echo ${DOCKER_IMAGE_NAME}:${tag} | tr '[:upper:]' '[:lower:]')
     set -- -t $DOCKER_IMAGE_NAME_WITH_TAG "$@"
