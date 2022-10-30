@@ -4,7 +4,7 @@
 
 ### Build and publish Docker Image with the `head` tag for the `develop` branch
 
-#### Full workflow example:
+#### Complete workflow example
 ```yaml
 name: Build and publish
 
@@ -20,8 +20,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
 
-    - name: Build and Publish head Docker image
-      uses: VaultVulp/gp-docker-action@1.4.0
+    - name: Build and publish "head" Docker image
+      uses: VaultVulp/gp-docker-action@1.5.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
@@ -30,7 +30,7 @@ jobs:
 
 ### Build and publish Docker Image with a `latest` tag for the `master` branch with different dockerfile
 
-#### Full workflow example:
+#### Complete workflow example
 ```yaml
 name: Build and publish
 
@@ -46,8 +46,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
 
-    - name: Build and Publish latest Docker image
-      uses: VaultVulp/gp-docker-action@1.4.0
+    - name: Build and publish "latest" Docker image
+      uses: VaultVulp/gp-docker-action@1.5.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide only Docker image name, tag will be automatically set to latest
@@ -56,7 +56,7 @@ jobs:
 
 ### Build and publish Docker Image with a tag equal to a git tag
 
-#### Full workflow example:
+#### Complete workflow example
 ```yaml
 name: Build and publish
 
@@ -72,8 +72,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
     
-    - name: Build and Publish Tag Docker image
-      uses: VaultVulp/gp-docker-action@1.4.0
+    - name: Build and publish Docker image tagged according to a git-tag
+      uses: VaultVulp/gp-docker-action@1.5.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide only Docker image name
@@ -82,7 +82,7 @@ jobs:
 
 ### Build and publish Docker Image with a different build context
 
-#### Full workflow example:
+#### Complete workflow example
 ```yaml
 name: Build and publish
 
@@ -95,8 +95,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
     
-    - name: Build and Publish Docker image from a different context
-      uses: VaultVulp/gp-docker-action@1.4.0
+    - name: Build and publish Docker image from a different context
+      uses: VaultVulp/gp-docker-action@1.5.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
@@ -105,7 +105,7 @@ jobs:
 
 ### Pulling an image before building it
 
-#### Full workflow example:
+#### Complete workflow example
 ```yaml
 name: Build and publish
 
@@ -118,8 +118,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
 
-    - name: Build and Publish head Docker image
-      uses: VaultVulp/gp-docker-action@1.4.0
+    - name: Pull, build and publish Docker image
+      uses: VaultVulp/gp-docker-action@1.5.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
@@ -128,9 +128,9 @@ jobs:
 
 ### Passing additional image tags
 
-**NB**: `additional-image-tags` will **not** replace `image-tag` argument - additional tags will be appended to the list. If no `image-tag` was specified, then image will be tagged with the `latest` tag.
+**NB**, `additional-image-tags` will **not** replace `image-tag` argument - additional tags will be appended to the list. If no `image-tag` was specified, then image will be tagged with the `latest` tag.
 
-#### Examples:
+#### Examples
 
 ##### `image-tag` was specified: 
 ```yaml
@@ -156,7 +156,7 @@ Action will produce one image with three tags:
 - `my-cool-service:second`
 - `my-cool-service:third`
 
-#### Full workflow example:
+#### Complete workflow example
 ```yaml
 name: Build and publish 
 
@@ -169,13 +169,48 @@ jobs:
     steps:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
  
-    - name: Build with multiple tags
-      uses: VaultVulp/gp-docker-action@1.4.0
+    - name: Build and publish Docker image with multiple tags
+      uses: VaultVulp/gp-docker-action@1.5.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
         image-tags: first # if ommitted will be replaced with "latest"
         additional-image-tags: second third # two additional tags for an image
+```
+
+### Cross-platform builds
+
+It's possible to leverage `custom-args` to build images for different architectures.
+
+#### Examples
+##### One architeture
+```yaml
+custom-args: --platform=linux/arm64 # target architecture
+```
+##### Multiple architetures
+```yaml
+custom-args: --platform=linux/arm64,linux/amd64 # multiple target architectures
+```
+
+#### Complete workflow example
+```yaml
+name: Build and publish
+
+on: push
+
+jobs:
+  cross-platform-builds:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2.5.0 # Checking out the repo
+ 
+    - name: Build and publish Docker image for ARM64 and AMD64 architectures at the same time
+      uses: VaultVulp/gp-docker-action@1.5.0
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
+        image-name: my-cool-service # Provide Docker image name
+        custom-args: --platform=linux/arm64,linux/amd64 # specify target architectures via the `custom-args` agrument
 ```
 
 ### Passing additional arguments to the docker build command
@@ -193,7 +228,7 @@ custom-args: --build-arg some="value"
                       # ^ this space might break the action
 ```
 
-#### Full workflow example:
+#### Complete workflow example
 ```yaml
 name: Build and publish
 
@@ -206,13 +241,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
  
-    - name: Build with --build-arg(s)
-      uses: VaultVulp/gp-docker-action@1.4.0
+    - name: Build and publish Docker image with arbitrary --build-arg(s)
+      uses: VaultVulp/gp-docker-action@1.5.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
         custom-args: --build-arg=some="value" --build-arg=some_other="value" # Pass some additional arguments to the docker build command
 ```
+
+## My own repo with examples
+
+[VaultVulp/test-gp-docker-action](https://github.com/VaultVulp/test-gp-docker-action)
 
 ## Security considerations
 
