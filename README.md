@@ -2,7 +2,7 @@
 
 ## Usage examples:
 
-### Build and publish Docker Image with tje `head` tag for the `develop` branch
+### Build and publish Docker Image with the `head` tag for the `develop` branch
 
 #### Full workflow example:
 ```yaml
