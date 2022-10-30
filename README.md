@@ -20,7 +20,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
 
-    - name: Build and Publish head Docker image
+    - name: Build and publish "head" Docker image
       uses: VaultVulp/gp-docker-action@1.5.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
@@ -46,7 +46,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
 
-    - name: Build and Publish latest Docker image
+    - name: Build and publish "latest" Docker image
       uses: VaultVulp/gp-docker-action@1.5.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
@@ -72,7 +72,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
     
-    - name: Build and Publish Tag Docker image
+    - name: Build and publish Docker image tagged according to a git-tag
       uses: VaultVulp/gp-docker-action@1.5.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
@@ -95,7 +95,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
     
-    - name: Build and Publish Docker image from a different context
+    - name: Build and publish Docker image from a different context
       uses: VaultVulp/gp-docker-action@1.5.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
@@ -118,7 +118,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
 
-    - name: Build and Publish head Docker image
+    - name: Pull, build and publish Docker image
       uses: VaultVulp/gp-docker-action@1.5.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
@@ -169,7 +169,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
  
-    - name: Build with multiple tags
+    - name: Build and publish Docker image with multiple tags
       uses: VaultVulp/gp-docker-action@1.5.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
@@ -205,7 +205,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
  
-    - name: Build with --build-arg(s)
+    - name: Build and publish Docker image for ARM64 and AMD64 architectures at the same time
       uses: VaultVulp/gp-docker-action@1.5.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
@@ -241,7 +241,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
  
-    - name: Build with --build-arg(s)
+    - name: Build and publish Docker image with arbitrary --build-arg(s)
       uses: VaultVulp/gp-docker-action@1.5.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
