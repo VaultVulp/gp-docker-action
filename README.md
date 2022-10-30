@@ -2,7 +2,7 @@
 
 ## Usage examples:
 
-### Build and publish Docker Image with a `head` tag for the `develop` branch
+### Build and publish Docker Image with tje `head` tag for the `develop` branch
 
 #### Full workflow example:
 ```yaml
@@ -21,7 +21,7 @@ jobs:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
 
     - name: Build and Publish head Docker image
-      uses: VaultVulp/gp-docker-action@1.2.0
+      uses: VaultVulp/gp-docker-action@1.4.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
@@ -47,7 +47,7 @@ jobs:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
 
     - name: Build and Publish latest Docker image
-      uses: VaultVulp/gp-docker-action@1.2.0
+      uses: VaultVulp/gp-docker-action@1.4.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide only Docker image name, tag will be automatically set to latest
@@ -73,7 +73,7 @@ jobs:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
     
     - name: Build and Publish Tag Docker image
-      uses: VaultVulp/gp-docker-action@1.2.0
+      uses: VaultVulp/gp-docker-action@1.4.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide only Docker image name
@@ -96,14 +96,14 @@ jobs:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
     
     - name: Build and Publish Docker image from a different context
-      uses: VaultVulp/gp-docker-action@1.2.0
+      uses: VaultVulp/gp-docker-action@1.4.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
         build-context: ./dev # Provide path to the folder with a Dockerfile
 ```
 
-### Pulling the image before building it
+### Pulling an image before building it
 
 #### Full workflow example:
 ```yaml
@@ -119,7 +119,7 @@ jobs:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
 
     - name: Build and Publish head Docker image
-      uses: VaultVulp/gp-docker-action@1.2.0
+      uses: VaultVulp/gp-docker-action@1.4.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
@@ -170,7 +170,7 @@ jobs:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
  
     - name: Build with --build-arg(s)
-      uses: VaultVulp/gp-docker-action@1.2.0
+      uses: VaultVulp/gp-docker-action@1.4.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
@@ -207,14 +207,14 @@ jobs:
     - uses: actions/checkout@v2.5.0 # Checking out the repo
  
     - name: Build with --build-arg(s)
-      uses: VaultVulp/gp-docker-action@1.2.0
+      uses: VaultVulp/gp-docker-action@1.4.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: my-cool-service # Provide Docker image name
         custom-args: --build-arg=some="value" --build-arg=some_other="value" # Pass some additional arguments to the docker build command
 ```
 
-------
+## Security considerations
 
 You will encounter the following log message in your GitHub Actions Pipelines:
 
