@@ -31,6 +31,10 @@ inputs:
     description: 'Any additional docker build arguments as a string'
     default: ""
     required: false
+  additional-image-tags:
+    description: 'Multiple tags that will be attached to a built image'
+    default: ""
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -43,6 +47,7 @@ runs:
     - ${{ inputs.build-context}}
     - ${{ inputs.pull-image}}
     - ${{ inputs.custom-args}}
+    - ${{ inputs.additional-image-tags}}
 branding:
   icon: 'box'
   color: 'blue'
