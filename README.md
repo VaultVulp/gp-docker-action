@@ -126,10 +126,9 @@ jobs:
         pull-image: true # Provide the flag to pull image
 ```
 
-### Passing additional image tags to the docker build command
+### Passing additional image tags
 
 **NB**: `additional-image-tags` will **not** replace `image-tag` argument - additional arguments will be appended.
-
 
 #### Examples:
 
