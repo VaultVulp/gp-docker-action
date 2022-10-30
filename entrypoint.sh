@@ -25,4 +25,4 @@ fi
 set -- -t $DOCKER_IMAGE_NAME_WITH_TAG -f $DOCKERFILE $CUSTOM_DOCKER_BUILD_ARGS $BUILD_CONTEXT
 docker buildx build "$@"
 
-docker push $DOCKER_IMAGE_NAME_WITH_TAG
+docker push --all-tags $DOCKER_IMAGE_NAME
