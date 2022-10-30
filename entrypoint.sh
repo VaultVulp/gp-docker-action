@@ -32,6 +32,4 @@ do
 done
 
 docker buildx create --use # Creating builder instance to support cross-platform builds
-docker buildx build "$@"
-
-docker push --all-tags $DOCKER_IMAGE_NAME
+docker buildx build --push "$@"
