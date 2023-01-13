@@ -23,7 +23,11 @@ if [ $PULL_IMAGE == "true" ]; then
   docker pull $DOCKER_IMAGE_NAME_WITH_TAG || docker pull $DOCKER_IMAGE_NAME || 1
 fi
 
-set -- -t $DOCKER_IMAGE_NAME_WITH_TAG -f $DOCKERFILE
+set -- -t $DOCKER_IMAGE_NAME_WITH_TAG
+
+if [ $DOCKERFILE != "Dockerfile" ]; then
+  set -- "$@" -f $DOCKERFILE
+fi
 
 if [ $CUSTOM_DOCKER_BUILD_ARGS != "" ]; then
   set -- "$@"  $CUSTOM_DOCKER_BUILD_ARGS
