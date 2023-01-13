@@ -41,7 +41,5 @@ do
     set -- -t $DOCKER_IMAGE_NAME_WITH_TAG "$@"
 done
 
-echo "$@"
-
 docker buildx create --use # Creating builder instance to support cross-platform builds
 docker buildx build --push "$@"
