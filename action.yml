@@ -27,12 +27,16 @@ inputs:
     description: 'Pull the image before buiding it'
     default: "false"
     required: false
-  custom-args:
-    description: 'Any additional docker build arguments as a string'
-    default: ""
-    required: false
   additional-image-tags:
     description: 'Multiple tags that will be attached to a built image'
+    default: ""
+    required: false
+  image-platform:
+    description: 'Target image platform/platforms'
+    default: ""
+    required: false
+  custom-args:
+    description: 'Any additional docker build arguments as a string'
     default: ""
     required: false
 runs:
@@ -46,8 +50,9 @@ runs:
     - ${{ inputs.dockerfile }}
     - ${{ inputs.build-context}}
     - ${{ inputs.pull-image}}
-    - ${{ inputs.custom-args}}
     - ${{ inputs.additional-image-tags}}
+    - ${{ inputs.image-platform}}
+    - ${{ inputs.custom-args}}
 branding:
   icon: 'box'
   color: 'blue'
