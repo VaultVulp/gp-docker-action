@@ -52,6 +52,4 @@ do
     set -- -t $DOCKER_IMAGE_NAME_WITH_TAG "$@"
 done
 
-echo "$@"
-
 docker buildx build --push "$@"
