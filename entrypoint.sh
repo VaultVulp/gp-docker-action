@@ -24,9 +24,9 @@ docker login -u publisher -p ${DOCKER_TOKEN} ghcr.io
 
 if [ $PULL_IMAGE == "true" ]; then
   if [ $DOCKER_IMAGE_PLATFORM != "" ]; then
-    docker pull $DOCKER_IMAGE_NAME_WITH_TAG --platform $DOCKER_IMAGE_PLATFORM || docker pull $DOCKER_IMAGE_NAME --platform $DOCKER_IMAGE_PLATFORM || 1 
+    docker pull $DOCKER_IMAGE_NAME_WITH_TAG --platform $DOCKER_IMAGE_PLATFORM || docker pull $DOCKER_IMAGE_NAME --platform $DOCKER_IMAGE_PLATFORM || true
   else
-    docker pull $DOCKER_IMAGE_NAME_WITH_TAG || docker pull $DOCKER_IMAGE_NAME || 1
+    docker pull $DOCKER_IMAGE_NAME_WITH_TAG || docker pull $DOCKER_IMAGE_NAME || true
   fi
 fi
 
@@ -37,7 +37,7 @@ if [ $DOCKERFILE != "Dockerfile" ]; then
 fi
 
 if [ $DOCKER_IMAGE_PLATFORM != "" ]; then
-  set -- "$@" --platform="$DOCKER_IMAGE_PLATFORM"
+  set -- "$@" --platform $DOCKER_IMAGE_PLATFORM
 fi
 
 if [ $CUSTOM_DOCKER_BUILD_ARGS != "" ]; then
@@ -51,5 +51,7 @@ do
     DOCKER_IMAGE_NAME_WITH_TAG=$(echo ${DOCKER_IMAGE_NAME}:${tag} | tr '[:upper:]' '[:lower:]')
     set -- -t $DOCKER_IMAGE_NAME_WITH_TAG "$@"
 done
+
+echo "$@"
 
 docker buildx build --push "$@"
