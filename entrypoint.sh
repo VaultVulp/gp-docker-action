@@ -37,11 +37,11 @@ if [ $DOCKERFILE != "Dockerfile" ]; then
 fi
 
 if [ $DOCKER_IMAGE_PLATFORM != "" ]; then
-  set -- "$@" --platform $DOCKER_IMAGE_PLATFORM
+  set -- "$@" --platform="$DOCKER_IMAGE_PLATFORM"
 fi
 
 if [ $CUSTOM_DOCKER_BUILD_ARGS != "" ]; then
-  set -- "$@"  $CUSTOM_DOCKER_BUILD_ARGS
+  set -- "$@" $CUSTOM_DOCKER_BUILD_ARGS
 fi
 
 set -- "$@" $BUILD_CONTEXT
